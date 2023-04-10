@@ -1,0 +1,21 @@
+/bin/
+/.classpath
+/.project
+/.settings/
+/*.jar
+/.idea
+/dist
+**/*.iml
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Ignore logs
+*.log
+
+# Ignore compiled classes in modules
+/core/out/
+/gui/out/
+/out/
