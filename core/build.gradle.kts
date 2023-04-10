@@ -56,11 +56,12 @@ artifacts {
 publishing {
     repositories {
         mavenLocal()
+        maven(url = "https://jitpack.io")
     }
     publications {
         create<MavenPublication>("mavenJava") {
-            group = project.group.toString()
-            artifactId = project.name
+            groupId = "com.github.laytodev"
+            artifactId = "layer-libraries"
             version = project.version.toString()
             from(components["java"])
         }
