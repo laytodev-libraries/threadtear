@@ -34,7 +34,7 @@ tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
+val sourcesJar = tasks.create<Jar>("sourcesJar") {
     archiveClassifier.set("sources")
     from(sourceSets["main"].allSource)
 }
@@ -43,10 +43,9 @@ val sourcesJar by tasks.registering(Jar::class) {
 val fatJar = tasks.named<Jar>("jar") {
     archiveClassifier.set("")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from(configurations.compileClasspath.get().map {
+    from(configurations.runtimeClasspath.get().map {
         if(it.isDirectory) it else zipTree(it)
     })
-    with(tasks.jar.get())
 }
 
 artifacts {
@@ -60,6 +59,9 @@ publishing {
     }
     publications {
         create<MavenPublication>("mavenJava") {
+            group = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
             from(components["java"])
         }
     }
